@@ -1,10 +1,10 @@
-import React from "react";
+import { Home } from "./pages/Home";
 
-import { ImageUploader } from "./components/ImageUploader";
+import './styles/global.scss';
 
 function App() {
   return (
-    <ImageUploader />
+    <Home />
   );
 }
 
