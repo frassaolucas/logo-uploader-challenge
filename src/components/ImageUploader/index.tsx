@@ -1,13 +1,21 @@
 import { useCallback, useState } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 import styles from './styles.module.scss';
 
 import imgIcon from '../../assets/img-icon.svg';
 import closeIcon from '../../assets/close-icon.svg';
+import alertIcon from '../../assets/alert-icon.svg';
+
+type selectedFileProps = {
+  url?: string;
+  width?: number;
+}
 
 export function ImageUploader() {
-  const [selectedFileUrl, setSelectedFileUrl] = useState('');
+  const [selectedFile, setSelectedFile] = useState<selectedFileProps>({ width: 100 });
   const [hasError, setHasError] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -17,54 +25,141 @@ export function ImageUploader() {
         const file = acceptedFiles[0];
         const fileUrl = URL.createObjectURL(file);
 
-        setSelectedFileUrl(fileUrl);
+        setSelectedFile({
+          ...selectedFile,
+          url: fileUrl,
+        });
       } else {
         setHasError(true);
       }
 
       setIsUploading(true);
     },
-    []
+    [selectedFile]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: 'video/*',
+    accept: 'image/*',
   });
+
+  function handleResetUpload() {
+    setIsUploading(false);
+    setHasError(false);
+    setSelectedFile({
+      ...selectedFile,
+      url: '',
+    });
+  }
+
+  function handleSize(width: number) {
+    setSelectedFile({
+      ...selectedFile,
+      width,
+    })
+  }
+
+  function handleSaveImageCrop() {
+    setIsUploading(false);
+    setHasError(false);
+  }
 
   return (
     <>
       {!isUploading ? (
+        // dropzone
         <div className={styles.uploader} {...getRootProps()}>
           <input {...getInputProps()} accept="image/*" />
-          <p>
-            <img src={imgIcon} alt="icon" />
 
-            <strong>
-              Organization Logo
-          </strong>
-          </p>
+          {selectedFile.url && (
+            <div className={styles.uploadedImage}>
+              <img src={selectedFile.url} alt="Logo" width={`${selectedFile.width}%`} />
+            </div>
+          )}
 
-          <p>
-            Drop the image here or click to browse.
-          </p>
+          <div className={styles.dropzoneText}>
+            <p>
+              <img src={imgIcon} alt="icon" />
 
+              <strong>
+                Organization Logo
+              </strong>
+            </p>
+
+            <p>
+              Drop the image here or click to browse.
+            </p>
+          </div>
         </div>
       ) : isUploading && hasError ? (
+        // error
         <div className={styles.error}>
-          <button type="button" className={styles.closeBtn}>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={handleResetUpload}
+          >
             <img src={closeIcon} alt="close" />
           </button>
-          error
+
+          <div className={styles.errorImage}>
+            <img src={alertIcon} alt="Error" />
+          </div>
+
+          <div className={styles.errorAction}>
+            <p>Sorry, the upload failed.</p>
+
+            <button type="button" onClick={handleResetUpload}>
+              Try again
+              </button>
+          </div>
         </div>
       ) : isUploading && !hasError ? (
+        // resize
         <div className={styles.resizeImage}>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={handleResetUpload}
+          >
+            <img src={closeIcon} alt="close" />
+          </button>
+
           <div className={styles.uploadedImage}>
-            <img src={selectedFileUrl} alt="Logo" width="100%" />
+            <img src={selectedFile.url} alt="Logo" width={`${selectedFile.width}%`} />
           </div>
 
           <div className={styles.resizeControls}>
-            <button type="button">Save</button>
+
+            <span>Crop</span>
+
+            <Slider
+              min={50}
+              max={350}
+              value={selectedFile.width}
+              onChange={handleSize}
+              trackStyle={{
+                backgroundColor: '#3F80FF',
+                height: 2
+              }}
+              railStyle={{
+                backgroundColor: '#B9D1FF',
+                height: 2
+              }}
+              handleStyle={{
+                width: 12,
+                height: 12,
+                backgroundColor: '#3F80FF',
+                borderWidth: 0
+              }}
+            />
+
+            <button
+              type="button"
+              onClick={handleSaveImageCrop}
+            >
+              Save
+            </button>
           </div>
         </div>
       ) : null}
