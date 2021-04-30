@@ -1,0 +1,29 @@
+.uploadedImage {
+  flex-shrink: 0;
+
+  position: relative;
+  width: 7.12rem;
+  height: 7.12rem;
+
+  margin: 0 auto;
+
+  border-radius: 50%;
+  background: var(--white);
+
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 553px) {
+  .uploadedImage {
+    margin: 0;
+  }
+}

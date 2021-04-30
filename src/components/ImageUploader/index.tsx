@@ -3,19 +3,21 @@ import { FileRejection, useDropzone } from "react-dropzone";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+import { ImageUploaded } from "../ImageUploaded";
+
 import styles from './styles.module.scss';
 
 import imgIcon from '../../assets/img-icon.svg';
 import closeIcon from '../../assets/close-icon.svg';
 import alertIcon from '../../assets/alert-icon.svg';
 
-type selectedFileProps = {
+type SelectedFileProps = {
   url?: string;
   width?: number;
 }
 
 export function ImageUploader() {
-  const [selectedFile, setSelectedFile] = useState<selectedFileProps>({ width: 100 });
+  const [selectedFile, setSelectedFile] = useState<SelectedFileProps>({ width: 100 });
   const [hasError, setHasError] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -61,7 +63,6 @@ export function ImageUploader() {
 
   function handleSaveImageCrop() {
     setIsUploading(false);
-    setHasError(false);
   }
 
   return (
@@ -72,9 +73,7 @@ export function ImageUploader() {
           <input {...getInputProps()} accept="image/*" />
 
           {selectedFile.url && (
-            <div className={styles.uploadedImage}>
-              <img src={selectedFile.url} alt="Logo" width={`${selectedFile.width}%`} />
-            </div>
+            <ImageUploaded selectedFile={selectedFile} />
           )}
 
           <div className={styles.dropzoneText}>
@@ -125,9 +124,7 @@ export function ImageUploader() {
             <img src={closeIcon} alt="close" />
           </button>
 
-          <div className={styles.uploadedImage}>
-            <img src={selectedFile.url} alt="Logo" width={`${selectedFile.width}%`} />
-          </div>
+          <ImageUploaded selectedFile={selectedFile} />
 
           <div className={styles.resizeControls}>
 
