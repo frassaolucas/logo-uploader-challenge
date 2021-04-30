@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+<h1 align="center">
+  React Challenge </br>
+  Frontend
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="https://github.com/frassaolucas">
+    <img alt="Made By" src="https://img.shields.io/badge/made%20by-frassaolucas-%2304D361">
+  </a>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
+</p>
 
-## Available Scripts
+<p align="center">
+  <img alt="GitHub" src=".github/frontend-challenge.gif">
+</p>
 
-In the project directory, you can run:
+## About
+This challenge consisted of creating a React component using Typescript to let users upload and crop avatars.
 
-### `yarn start`
+## Techs
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-  [Typescript](https://www.typescriptlang.org/)
+-  [ReactJS](https://reactjs.org/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Get started
 
-### `yarn test`
+1. Clone the repository
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+  $ git clone https://github.com/frassaolucas/logo-uploader-challenge
+```
 
-### `yarn build`
+2. Run the application
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+  # Installing dependencies using yarn.
+  $ yarn
+```
+or
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+  # Installing dependencies using npm.
+  $ npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Run the application
 
-### `yarn eject`
+```sh
+  # Run application using yarn.
+  $ yarn start
+```
+or
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+  # Run application using npm.
+  $ npm start
+```
