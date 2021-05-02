@@ -55,3 +55,10 @@ or
   # Run application using npm.
   $ npm start
 ```
+
+## Posible future improvements
+
+- Save the exact image size instead of the percentage;
+- Save the information to a server after clicking on the save button;
+- Create frontend tests for the upload;
+- Add animations and/or visual feedback for each step of the upload process;
